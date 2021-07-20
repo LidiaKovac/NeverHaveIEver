@@ -12,18 +12,27 @@ const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 let questions = Questions
 const [question, setQuestion] = useState({...Questions[0]})
+const [visited, setVisited] = useState([0])
 const [index, setIndex] = useState(0)
 //useEffect(()=> {
 //    questions = [...Questions]
 //}, [])
-const randomize = (questList) => {
-    console.log(questList.length)
-    let number = Math.floor(Math.random()*(questList.length - 1))
-    console.log("random", number)
-    setQuestion(Questions[number])
-}
+//const randomize = (questList) => {
+//    let number =
+//    return number
+//}
+//const filter = (questList, current) => {
+//
+//    console.log(filteredQuest)
+//    return filteredQuest
+//}
 const nextQuestion = () => {
-    randomize(questions)
+    let num = Math.floor(Math.random()*(questions.length - 1))
+    setQuestion(questions[num])
+    setVisited([...visited, num])
+//    questions = questions.filter((q) => !q.question.includes(question.question))
+    questions.splice(num,1)
+    console.log(num, questions)
     setColor(colors[Math.floor(Math.random()*colors.length)])
 }
 const styles = StyleSheet.create({
