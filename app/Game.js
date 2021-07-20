@@ -10,17 +10,22 @@ const [bgColors, setColor] = useState("#08bdbd")
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
-const [question, setQuestion] = useState({question: "Question", shots: 1})
-useEffect(()=> {
-    setColor(colors[Math.floor(Math.random()*colors.length)])
-    setQuestion(randomizeQuestion())
-    console.log(question.shots)
-
-}, [])
-const randomizeQuestion = () => {
-    return Questions[Math.floor(Math.random()*Questions.length)]
+let questions = Questions
+const [question, setQuestion] = useState({...Questions[0]})
+const [index, setIndex] = useState(0)
+//useEffect(()=> {
+//    questions = [...Questions]
+//}, [])
+const randomize = (questList) => {
+    console.log(questList.length)
+    let number = Math.floor(Math.random()*(questList.length - 1))
+    console.log("random", number)
+    setQuestion(Questions[number])
 }
-
+const nextQuestion = () => {
+    randomize(questions)
+    setColor(colors[Math.floor(Math.random()*colors.length)])
+}
 const styles = StyleSheet.create({
     wrap: {
         backgroundColor: bgColors,
@@ -50,14 +55,13 @@ const styles = StyleSheet.create({
 })
 return (
         <Pressable style={styles.wrap} onPressIn={()=> {
-            setQuestion(randomizeQuestion())
-            setColor(colors[Math.floor(Math.random()*colors.length)])
+            nextQuestion()
         } }>
-            <Text style={styles.text}> {question.question} </Text>
+            <Text style={styles.text}> {question ? question.question : "No questions left! :D"} </Text>
             <View style={styles.shots}>
 
                 {
-                    question.shots.length > 0  && question.shots.map((s,i)=> <Image key={i} style={styles.shot}  source={require("./assets/glass.png")}/>)
+                    question && question.shots && question.shots.length > 0  && question.shots.map((s,i)=> <Image key={i} style={styles.shot}  source={require("./assets/glass.png")}/>)
                 }
 
             </View>

@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import { Text, View, Image, StyleSheet } from 'react-native';
-import Loading from "./Loading.js"
-import Game from "./Game.js"
-import Home from "./Home.js"
+import Loading from "./app/Loading.js"
+import Game from "./app/Game.js"
+import Home from "./app/Home.js"
 import { NativeRouter, Route, Link, useHistory } from "react-router-native";
 const styles = StyleSheet.create({
   image: {
