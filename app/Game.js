@@ -4,7 +4,7 @@ import Questions from "./questions.json"
 import {useParams} from "react-router-native"
 const Game = ()=> {
 const colors = [
-    "#29bf12", "#abff4f", "#08bdbd", "#f21b3f", "#ff9914"
+    "#29bf12", "#abff4f", "#08bdbd", "#f21b3f", "#ff9914","#54F2F2", "#FFC857", "#D7263D", "#0197F6"
 ]
 const [bgColors, setColor] = useState("#08bdbd")
 
@@ -14,23 +14,10 @@ let questions = Questions
 const [question, setQuestion] = useState({...Questions[0]})
 const [visited, setVisited] = useState([0])
 const [index, setIndex] = useState(0)
-//useEffect(()=> {
-//    questions = [...Questions]
-//}, [])
-//const randomize = (questList) => {
-//    let number =
-//    return number
-//}
-//const filter = (questList, current) => {
-//
-//    console.log(filteredQuest)
-//    return filteredQuest
-//}
 const nextQuestion = () => {
     let num = Math.floor(Math.random()*(questions.length - 1))
     setQuestion(questions[num])
     setVisited([...visited, num])
-//    questions = questions.filter((q) => !q.question.includes(question.question))
     questions.splice(num,1)
     console.log(num, questions)
     setColor(colors[Math.floor(Math.random()*colors.length)])
